@@ -40,6 +40,25 @@ The result is stored in `sdot_asm`, which is a double-precision floating-point v
    - Run each kernel 20 times and calculate the **average execution time**.
 
 ---
+This repository contains two programs related to calculating the dot product:
+
+1. **`Actual_DP_Solving.c`**: Computes the dot product and outputs the result.
+2. **`DP.c`**: Measures the average execution time of both the C and Assembly dot product implementations for performance analysis.
+
+Both programs rely on **`DP_asm.asm`**, which contains the Assembly implementation of the dot product.
+
+### Prerequisites
+
+To compile and run the programs, ensure you have the following tools installed:
+- **NASM** (Netwide Assembler): To assemble the `.asm` file.
+- **GCC** (MinGW or equivalent for Windows): To compile the C programs and link them with the Assembly code.
+- A Windows system with a command-line terminal.
+
+### File Descriptions
+
+- **`DP_asm.asm`**: Assembly implementation of the dot product.
+- **`Actual_DP_Solving.c`**: A C program to compute and display the dot product result.
+- **`DP.c`**: A C program to measure and display the average execution time of the dot product computation.
 
 ## **Setup Instructions**
 
@@ -49,23 +68,32 @@ The result is stored in `sdot_asm`, which is a double-precision floating-point v
 - **Tools used**: DEV-C++ and SASM 
 
 ### **2. Building the Program**
+
 1. Clone the repository:
    ```
    git clone https://github.com/LBYARCH-MP2/dot-product-kernels.git
    cd dot-product-kernels
    ```
 2. Compile the program:
-
-   **For Windows:**
+###  2.1: For `Actual_DP_Solving.c`
      ```bash
      nasm -f elf64 -o DP_asm.o DP_asm.asm
      ```
      ```bash
-     gcc -O3 -o dot_product_test DP.c DP_asm.o -lm
+     gcc -o Actual_DP_Solving.exe Actual_DP_Solving.c DP_asm.obj -lm
      ```
-4. Run the program:
+###  2.2: For `DP.c`
+     ```bash
+     gcc -o DP.exe DP.c DP_asm.obj -lm
+     ```
+3. Run the program:
+### 3.1: For `Actual_DP_Solving.c`
    ```bash
-   dot_product_test.exe
+   Actual_DP_Solving.exe
+   ```
+###  3.2: For `DP.c`
+   ```bash
+   DP.exe
    ```
 
 ---
@@ -73,22 +101,53 @@ The result is stored in `sdot_asm`, which is a double-precision floating-point v
 ## **Program Structure**
 
 ### **Files**
-- `DP.c`: Contains the C implementation and the main program.
+- `Actual_DP_Solving.c`: Computes the dot product result using both C and Assembly implementations for correctness verification.
+- `DP.c`: Measures the execution time and performance of the C and Assembly implementations.
 - `DP_asm.asm`: Contains the x86-64 Assembly implementation.
 - `README.md`: This file.
 
 ### **Functions**
-1. **C Implementation (`DP.c`)**:
-   - Loops through `A` and `B`, multiplying and accumulating the results.
+
+1. **C Implementation (`Actual_DP_Solving.c` and `DP.c`)**:
+   - **`dot_product`**:
+     - Loops through arrays `A` and `B`, multiplying corresponding elements and accumulating the results.
+     - Serves as the reference for verifying the correctness of the Assembly implementation.
+   - **`main`**:
+     - Initializes vectors with random or predefined values.
+     - Calls the Assembly and C implementations to compute results.
+     - Measures the average execution time for performance analysis (in `DP.c`).
 
 2. **Assembly Implementation (`DP_asm.asm`)**:
-   - Uses **scalar SIMD registers** for loading, multiplying, and summing elements.
+   - **`dot_product_kernel`**:
+     - Receives the size of the vectors, their addresses, and a pointer to store the result.
+     - Utilizes **scalar SIMD registers** (`xmm0`, `xmm1`, `xmm2`) to perform:
+       - Element-wise multiplication.
+       - Accumulation of results into a dot product value.
+     - Efficiently processes double-precision floating-point numbers for optimized performance.
+
+3. **Performance Timing and Validation (`DP.c`)**:
+   - Measures the execution time of both implementations for vector sizes ranging from \(2^{20}\) to \(2^{28}\).
+   - Verifies the correctness of the Assembly implementation by comparing results with the C version.
+
+### **Execution Flow**
+1. Initialize input vectors (`A` and `B`) with random values.
+2. Call the C implementation to compute the dot product (reference result).
+3. Call the Assembly implementation to compute the dot product.
+4. Compare the results for correctness.
+5. Measure and output the average execution time for both implementations.
+6. Compute and display the speedup of the Assembly version compared to the C version.
+
 
 ---
+## Example Outputs
 
-## **Output Example**
-For vector size `2^20`:
+### **`Actual_DP_Solving.exe`**
+```plaintext
+Dot Product Result: 2566510280.000000
 ```
+
+### **`DP.exe`**
+```plaintext
 Running test for vector size 2^20 (1048576 elements)...
 C Kernel | Size: 1048576 | Avg Time: 1.000 ms | Result: 2566510280.000000
 ASM Kernel | Size: 1048576 | Avg Time: 1.000 ms | Result: 2566510280.000000

@@ -76,13 +76,17 @@ To compile and run the programs, ensure you have the following tools installed:
    ```
 ### 2. Compile the program:
    2.1: For `Actual_DP_Solving.c`
+
      ```bash
      nasm -f elf64 -o DP_asm.o DP_asm.asm
      ```
+
+     
      ```bash
      gcc -o Actual_DP_Solving.exe Actual_DP_Solving.c DP_asm.obj -lm
      ```
   2.2: For `DP.c`
+  
      ```bash
      gcc -o DP.exe DP.c DP_asm.obj -lm
      ```

@@ -240,7 +240,7 @@ This analysis helps understand how C and Assembly compare for the dot product ca
 
 ## **Video Demonstration**
 
-Find the video [here](https://drive.google.com/drive/folders/1AXK5z74TXkM0Yt-mIEY0QqFFOdF5b67N?usp=drive_link).
+Find the video [here](https://drive.google.com/file/d/1KDwa2Ftg1UUrjdk7kHkIa2hKTCY1eW1f/view?usp=sharing).
 
 
 ---

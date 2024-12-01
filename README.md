@@ -143,7 +143,10 @@ To compile and run the programs, ensure you have the following tools installed:
 
 ### **`Actual_DP_Solving.exe`**
 ```plaintext
-Dot Product Result: 2566510280.000000
+Before calling dot_product_kernel: 0.000000
+After calling dot_product_kernel (Assembly Code): 25.000000
+Dot product (C function): 25.000000
+The dot product results match!
 ```
 
 ### **`DP.exe`**

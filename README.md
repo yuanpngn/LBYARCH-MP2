@@ -7,6 +7,7 @@
 # **Dot Product Kernel Using C and x86-64 Assembly**
 
 ## **Project Overview**
+
 This project implements a dot product kernel for two vectors `vec1` and `vec2` using both:
 1. **C language**
 2. **x86-64 Assembly language**
@@ -19,6 +20,7 @@ The dot product is computed using **scalar SIMD floating-point instructions** fo
 ---
 
 ## **Dot Product Formula**
+
 For vectors `vec1 = [a1, a2, ..., an]` and `vec2 = [b1, b2, ..., bn]`, the dot product is:
 ```
 s_dot = a1*b1 + a2*b2 + ... + an*bn
@@ -28,6 +30,7 @@ The result is stored in `sdot_asm`, which is a double-precision floating-point v
 ---
 
 ## **Specifications**
+
 1. **Input**:
    - Scalar `n` (integer): length of vectors.
    - Vectors `vec1` and `vec2` of size `n` (double-precision floats).
@@ -76,29 +79,21 @@ To compile and run the programs, ensure you have the following tools installed:
    ```
 ### 2. Compile the program:
    2.1: For `Actual_DP_Solving.c`
+   - nasm -f win64 DP_asm.asm -o DP_asm.obj
+   - gcc -c Actual_DP_Solving.c -o Actual_DP_Solving.obj -m64
+   - gcc Actual_DP_Solving.obj DP_asm.obj -o Actual_DP_Solving.exe -m64
+   - Actual_DP_Solving.exe
 
-     ```bash
-     nasm -f elf64 -o DP_asm.o DP_asm.asm
-     ```
-
-     
-     ```bash
-     gcc -o Actual_DP_Solving.exe Actual_DP_Solving.c DP_asm.obj -lm
-     ```
   2.2: For `DP.c`
-  
-     ```bash
-     gcc -o DP.exe DP.c DP_asm.obj -lm
-     ```
+   - nasm -f win64 DP_asm.asm -o DP_asm.obj
+   - gcc -c DP.c -o DP.obj -m64
+   - gcc DP.obj DP_asm.obj -o DP.exe -m64
+   - DP.exe
 ### 3. Run the program:
  3.1: For `Actual_DP_Solving.c`
-   ```bash
-   Actual_DP_Solving.exe
-   ```
+  - Actual_DP_Solving.exe
   3.2: For `DP.c`
-   ```bash
-   DP.exe
-   ```
+  - DP.exe
 
 ---
 
@@ -111,7 +106,6 @@ To compile and run the programs, ensure you have the following tools installed:
 - `README.md`: This file.
 
 ### **Functions**
-
 1. **C Implementation (`Actual_DP_Solving.c` and `DP.c`)**:
    - **`dot_product`**:
      - Loops through arrays `A` and `B`, multiplying corresponding elements and accumulating the results.
@@ -141,10 +135,8 @@ To compile and run the programs, ensure you have the following tools installed:
 5. Measure and output the average execution time for both implementations.
 6. Compute and display the speedup of the Assembly version compared to the C version.
 
-
 ---
 ## Example Outputs
-
 ### **`Actual_DP_Solving.exe`**
 ```plaintext
 Before calling dot_product_kernel: 0.000000
@@ -156,31 +148,33 @@ The dot product results match!
 ### **`DP.exe`**
 ```plaintext
 Running test for vector size 2^20 (1048576 elements)...
-C Kernel | Size: 1048576 | Avg Time: 1.000 ms | Result: 2566510280.000000
+C Kernel | Size: 1048576 | Avg Time: 5.000 ms | Result: 2566510280.000000
 ASM Kernel | Size: 1048576 | Avg Time: 1.000 ms | Result: 2566510280.000000
 Correctness Check: PASSED
-Speedup: 1.00x
+Speedup: 5.00x
 ```
 
 ---
 
-## Performance Analysis of Dot Product Calculation
+## Performance Analysis 
 
-This document provides an analysis of the performance of two different implementations of the dot product calculation. The two implementations are written in C and Assembly (ASM). We compare how fast each implementation runs with different vector sizes and calculate the speedup of the C version over the Assembly version. The goal is to understand the performance of each version for different vector sizes and analyze which one performs better under various conditions.
+This project provides an analysis of the performance of two different implementations of the dot product calculation. The two implementations are written in C and Assembly (ASM). We compare how fast each implementation runs with different vector sizes and calculate the speedup of the C version over the Assembly version. The goal is to understand the performance of each version for different vector sizes and analyze which one performs better under various conditions.
 
 ### **Performance Table**
 
 | Vector Size | Avg Time (C) | Avg Time (Assembly) | Speedup |
 |-------------|--------------|---------------------|---------|
-| 2^20        | 1.000 ms     | 1.000 ms            | 1.00x   |
-| 2^21        | 2.000 ms     | 2.000 ms            | 1.00x   |
-| 2^22        | 5.000 ms     | 7.000 ms            | 0.71x   |
-| 2^23        | 9.000 ms     | 10.000 ms           | 0.90x   |
-| 2^24        | 19.000 ms    | 19.000 ms           | 1.00x   |
-| 2^25        | 36.000 ms    | 37.000 ms           | 0.97x   |
-| 2^26        | 72.000 ms    | 78.000 ms           | 0.92x   |
-| 2^27        | 146.000 ms   | 152.000 ms          | 0.96x   |
-| 2^28        | 368.000 ms   | 383.000 ms          | 0.96x   |
+| 2^20        | 0.000 ms     | 10.000 ms           | 0.00x   |
+| 2^21        | 6.000 ms     | 4.000 ms            | 1.50x   |
+| 2^22        | 11.000 ms    | 6.000 ms            | 1.83x   |
+| 2^23        | 24.000 ms    | 10.000 ms           | 2.40x   |
+| 2^24        | 47.000 ms    | 20.000 ms           | 2.35x   |
+| 2^25        | 97.000 ms    | 39.000 ms           | 2.49x   |
+| 2^26        | 204.000 ms   | 83.000 ms           | 2.46x   |
+| 2^27        | 385.000 ms   | 153.000 ms          | 2.52x   |
+| 2^28        | 876.000 ms   | 345.000 ms          | 2.54x   |
+
+Note: The average time values are subject to variations depending on the hardware, compiler optimizations, and specific implementation details of the code.
 
 ### Key Observations
 
@@ -188,52 +182,47 @@ This document provides an analysis of the performance of two different implement
 - The correctness of both implementations was checked by comparing the results. For all vector sizes tested, both the C and ASM versions gave the same results for the dot product calculation. This confirms that both implementations are functioning correctly and produce the expected output.
 
 #### 2. Performance
+
 - **Smaller Vector Sizes**:
-  - For smaller vector sizes, such as 2^20 (1,048,576 elements) and 2^21 (2,097,152 elements), both the C and ASM versions performed very similarly. The average times for both versions were almost the same, and the speedup was 1.00x, meaning that neither version was noticeably faster than the other for these smaller sizes. This suggests that for these small vector sizes, both implementations are efficient and can handle the computation with little difference in performance.
+  - For smaller vector sizes, such as 2^20 (1,048,576 elements) and 2^21 (2,097,152 elements), both the C and ASM versions performed very similarly. The average times for both versions were almost the same, and the speedup was 0.00x, meaning that neither version was noticeably faster than the other for these smaller sizes. This suggests that for these small vector sizes, both implementations are efficient and can handle the computation with little difference in performance.
   
 - **Larger Vector Sizes**:
-  - As the vector size increased, the performance difference between the C and ASM versions started to appear. For example, at vector size 2^22 (4,194,304 elements), the speedup of the C version dropped to 0.71x. This means that the ASM version was slightly slower than the C version for this size, and for even larger sizes (e.g., 2^23 and above), the performance gap between the two implementations became even smaller. At sizes like 2^24 (16,777,216 elements), the speedup was 1.00x again, and for even larger sizes like 2^28, the C and ASM kernels took almost the same amount of time.
+  - As the vector size increased, the ASM version consistently demonstrated better performance. For 
+  2^22 (4,194,304 elements), the speedup increased to 1.83x, with the ASM version achieving an average time of 6.000 ms compared to 11.000 ms for the C version. While at 2^24 (16,777,216 elements), the speedup was 2.35x, and this trend of increasing speedup continued with larger vector sizes. By 2^28(268,435,456 elements), the speedup reached 2.54x, with the ASM version completing the computation in 345.000 ms compared to 876.000 ms for the C version.
   
 - **Possible Reasons for Performance Trends**:
-  - The performance of both versions seems to become more similar as the vector size increases. This could be due to several factors:
-    - **Overhead in Assembly**: While Assembly is usually considered faster because it allows low-level control of the processor, the overhead of managing large data sets or the complexity of the assembly code might slow down the ASM kernel as the size of the vector grows.
-    - **C Optimizations**: The C compiler might optimize the C code better for large vector sizes, leading to similar or better performance compared to ASM for large inputs.
-    - **Hardware Limitations**: The speedup of the C kernel over ASM becomes less significant at larger sizes, possibly because modern processors are optimized to handle C code very efficiently, reducing the difference in performance between the two implementations.
+  - The performance of both versions seems to become more different as the vector size increases. This could be due to several factors:
+    - The increasing speedup as vector size grows suggests that the ASM implementation handles larger data sets more efficiently, likely due to low-level optimizations that reduce overhead during computation.
+    - The C version, while competitive for smaller vector sizes, likely incurs additional overhead as the size grows, such as memory allocation or compiler-introduced inefficiencies.
+    - Larger vector sizes may favor the ASM version due to better control over memory access patterns and instruction-level parallelism, which could minimize cache misses.
+    - Although modern compilers are highly optimized, they may not generate machine code as efficient as a well-tuned hand-written assembly implementation for certain large-scale computations.
 
 ### Conclusion
 
 - **Correctness**: Both the C and Assembly implementations were correct. The results matched in all tests, confirming that both kernels were implemented correctly and produced the expected dot product values.
   
 - **Performance**:
-  - For smaller vector sizes (2^20 and 2^21), the performance of the C and ASM implementations was almost the same, with no significant difference in execution time. Both kernels completed the dot product calculation quickly and efficiently.
-  - As the vector size increased, the performance difference between the two implementations began to emerge. The C kernel was sometimes slightly faster, while the Assembly version had slower or comparable performance at larger vector sizes. The speedup of the C kernel over ASM decreased as the vector size grew.
-  - For very large vector sizes (e.g., 2^28), both versions took nearly the same amount of time to complete, and the speedup of the C version was minimal (close to 1.00x). This suggests that while Assembly can be faster for smaller computations, the C version is more efficient for handling large data sizes due to better optimizations and less overhead.
+  - For smaller vector sizes (e.g., 2^20 and 2^21), the Assembly implementation showed a clear performance advantage by achieving faster execution times compared to the C version. This demonstrates that Assembly's low-level optimizations are effective for smaller workloads with minimal overhead.
+  - As the vector size grew, the performance advantage of Assembly became even more evident. At 2^28, for example, Assembly was over 2.54x faster than the C implementation, which shows its ability to handle larger data efficiently as the workload scales.
+  - On the other hand, while the C version performed well for smaller sizes, it struggled with larger vectors due to increasing overhead, possibly caused by memory management issues or compiler-related inefficiencies. Assembly, with its precise control over hardware operations, managed to maintain better efficiency in these cases.
 
 - **Final Thoughts**:
-  - The results show that while Assembly can be advantageous for small computations, the C version performs just as well or even better for large vectors. The C implementation benefits from optimizations made by modern compilers and processor architectures, making it more efficient for large-scale computations.
-  - For future improvements, further optimization of the Assembly code, or exploring hybrid approaches (using both C and ASM), could potentially provide better performance for large vector sizes.
+  - The results reveal that Assembly is highly effective for performance-critical tasks involving large-scale computations, leveraging more detailed control over the CPU and memory. As for the C implementation, however, remains highly robust, benefiting from modern compiler optimizations and ease of use, making it a practical choice for general-purpose applications.
 
 This analysis helps understand how C and Assembly compare for the dot product calculation and provides insights into when to use each implementation based on the size of the data being processed.
 
-
----
-
 ## **Screenshots**
-1. **C Implementation Output**:
+
+1. **C Implementation Output with Correctness**:
 ![image](https://github.com/user-attachments/assets/078b8c70-719c-4766-ad0c-868fa56e1782)
 
-
-2. **Implementation Output with the Average Execution time**:
+2. **Implementation Output with the Average Execution time and Correctness**:
    ![image](https://github.com/user-attachments/assets/8b3b39ad-9815-4342-bad7-c0eeabbeb014)
    ![image](https://github.com/user-attachments/assets/17a6c827-77f8-41c1-855b-703ba460543c)
 
----
-
 ## **Video Demonstration**
-A short video showcasing:
-- Source code explanation.
-- Compilation process.
-- Program execution and output.
-Find the video [here](https://your-video-link).
+
+Find the video [here](https://drive.google.com/drive/folders/1AXK5z74TXkM0Yt-mIEY0QqFFOdF5b67N?usp=drive_link).
+
 
 ---

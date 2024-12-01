@@ -1,10 +1,18 @@
+/* 
+C - Dot Product avergae execution time
+LBYARCH - S11 
+PANGAN, Yumi Ann
+DE LOS REYES, Carl Justin
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
+// Caculates Dot Product for ASM
 extern double dot_product_kernel(int n, double* vec1, double* vec2, double* sdot);
 
-// C version of the dot product function
+// Caculates Dot Product for C
 double dot_product(int n, double* vec1, double* vec2) {
     double result = 0.0;
     int i;
@@ -23,7 +31,7 @@ void run_test(int n) {
     // Initialize vectors with random values
     int i;
     for ( i = 0; i < n; i++) {
-        vec1[i] = rand() % 100;  // Random values for testing
+        vec1[i] = rand() % 100; 
         vec2[i] = rand() % 100;
     }
 
@@ -39,10 +47,8 @@ void run_test(int n) {
     clock_t end_asm = clock();
     double time_asm = ((double)(end_asm - start_asm)) / CLOCKS_PER_SEC * 1000.0; // Time in ms
 
-    // Print results for C kernel
+    // Print results for C kernel and ASM Kernel
     printf("C Kernel | Size: %d | Avg Time: %.3f ms | Result: %.6f\n", n, time_c, result_c);
-    
-    // Print results for ASM kernel
     printf("ASM Kernel | Size: %d | Avg Time: %.3f ms | Result: %.6f\n", n, time_asm, sdot_asm);
     
     // Check correctness
@@ -52,11 +58,9 @@ void run_test(int n) {
         printf("Correctness Check: FAILED\n");
     }
 
-    // Calculate speedup
+    // Calculate average speedup
     double speedup = time_c / time_asm;
     printf("Speedup: %.2fx\n", speedup);
-
-    // Free memory
     free(vec1);
     free(vec2);
 }

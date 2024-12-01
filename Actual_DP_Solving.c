@@ -1,3 +1,10 @@
+/* 
+C - Dot Product Computation
+LBYARCH - S11 
+PANGAN, Yumi Ann
+DE LOS REYES, Carl Justin
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,7 +19,6 @@ double dot_product(int n, double* vec1, double* vec2) {
     for (i = 0; i < n; i++) {
         result += vec1[i] * vec2[i];
     }
-    
     return result;
 }
 
@@ -20,7 +26,7 @@ int main() {
     // Example vectors (double precision)
     double vec1[] = {1.0, 2.0, 3.0, 4.0};
     double vec2[] = {0.5, 1.5, 2.5, 3.5};
-//	double vec2[] = {1.0, 2.0, 3.0, 4.0, 5};
+    //double vec2[] = {1.0, 2.0, 3.0, 4.0, 5};
     double sdot = 0.0; 
 
     int n = 4;  

@@ -69,29 +69,29 @@ To compile and run the programs, ensure you have the following tools installed:
 
 ### **2. Building the Program**
 
-1. Clone the repository:
+### 1. Clone the repository:
    ```
    git clone https://github.com/LBYARCH-MP2/dot-product-kernels.git
    cd dot-product-kernels
    ```
-2. Compile the program:
-###  2.1: For `Actual_DP_Solving.c`
+### 2. Compile the program:
+   2.1: For `Actual_DP_Solving.c`
      ```bash
      nasm -f elf64 -o DP_asm.o DP_asm.asm
      ```
      ```bash
      gcc -o Actual_DP_Solving.exe Actual_DP_Solving.c DP_asm.obj -lm
      ```
-###  2.2: For `DP.c`
+  2.2: For `DP.c`
      ```bash
      gcc -o DP.exe DP.c DP_asm.obj -lm
      ```
-3. Run the program:
-### 3.1: For `Actual_DP_Solving.c`
+### 3. Run the program:
+ 3.1: For `Actual_DP_Solving.c`
    ```bash
    Actual_DP_Solving.exe
    ```
-###  3.2: For `DP.c`
+  3.2: For `DP.c`
    ```bash
    DP.exe
    ```

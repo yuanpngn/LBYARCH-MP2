@@ -79,21 +79,39 @@ To compile and run the programs, ensure you have the following tools installed:
    ```
 ### 2. Compile the program:
    2.1: For `Actual_DP_Solving.c`
-   - nasm -f win64 DP_asm.asm -o DP_asm.obj
-   - gcc -c Actual_DP_Solving.c -o Actual_DP_Solving.obj -m64
-   - gcc Actual_DP_Solving.obj DP_asm.obj -o Actual_DP_Solving.exe -m64
-   - Actual_DP_Solving.exe
+   ```
+   nasm -f win64 DP_asm.asm -o DP_asm.obj
+   ```
+   ```
+   gcc -c Actual_DP_Solving.c -o Actual_DP_Solving.obj -m64
+   ```
+   ```
+   gcc Actual_DP_Solving.obj DP_asm.obj -o Actual_DP_Solving.exe -m64
+   ```
+   ```
+   Actual_DP_Solving.exe
+   ```
 
   2.2: For `DP.c`
-   - nasm -f win64 DP_asm.asm -o DP_asm.obj
-   - gcc -c DP.c -o DP.obj -m64
-   - gcc DP.obj DP_asm.obj -o DP.exe -m64
-   - DP.exe
+   ```
+   nasm -f win64 DP_asm.asm -o DP_asm.obj
+   ```
+   ```
+   gcc -c DP.c -o DP.obj -m64
+   ```
+   ```
+   gcc DP.obj DP_asm.obj -o DP.exe -m64
+   ```
+   ```
+   DP.exe
+   ```
 ### 3. Run the program:
  3.1: For `Actual_DP_Solving.c`
   - Actual_DP_Solving.exe
   3.2: For `DP.c`
-  - DP.exe
+   ```
+  DP.exe
+   ```
 
 ---
 

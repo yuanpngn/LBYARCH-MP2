@@ -7,7 +7,7 @@
 # **Dot Product Kernel Using C and x86-64 Assembly**
 
 ## **Project Overview**
-This project implements a dot product kernel for two vectors `A` and `B` using both:
+This project implements a dot product kernel for two vectors `vec1` and `vec2` using both:
 1. **C language**
 2. **x86-64 Assembly language**
 
@@ -216,10 +216,12 @@ This analysis helps understand how C and Assembly compare for the dot product ca
 
 ## **Screenshots**
 1. **C Implementation Output**:
-   _[Insert Screenshot of Output Here]_
+![image](https://github.com/user-attachments/assets/078b8c70-719c-4766-ad0c-868fa56e1782)
 
-2. **Assembly Implementation Output**:
-   _[Insert Screenshot of Output Here]_
+
+2. **Implementation Output with the Average Execution time**:
+   ![image](https://github.com/user-attachments/assets/8b3b39ad-9815-4342-bad7-c0eeabbeb014)
+   ![image](https://github.com/user-attachments/assets/17a6c827-77f8-41c1-855b-703ba460543c)
 
 ---
 
